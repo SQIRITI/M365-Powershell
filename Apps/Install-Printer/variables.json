@@ -1,0 +1,7 @@
+{
+    "printerName": "Printer Upstairs",
+    "driverName": "Brother HL-L8240CDW series",
+    "infFile": "BROCH20A.INF",
+    "portName": "IP_10.1.1.15",
+    "portAddress": "10.1.1.15"
+}

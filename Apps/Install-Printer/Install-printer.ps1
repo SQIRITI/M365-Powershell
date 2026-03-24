@@ -1,21 +1,15 @@
-#Printer Name
-$printerName = "Printer Upstairs"
+$scriptDir = Split-Path $script:MyInvocation.MyCommand.Path
+$scriptDir += "\variables.json"
+$JsonObject = Get-Content $scriptDir | ConvertFrom-Json
 
-#Driver Information
-$driverName = "Kyocera ECOSYS M6235cidn KX"
-$infFile = "OEMSETUP.INF"
+$driverStore = "$PSScriptRoot\Drivers\"
+$driverStore += $JsonObject.infFile
 
-#Printer Port Information
-$portName = "IP_10.1.0.11"
-$portAdress = "10.1.0.11"
+Write-Host $driverStore
 
-#Do not edit lines after this
-#------------------------------------------------------------#
-$driverStore = "$PSScriptRoot/Drivers"
+pnputil.exe /add-driver $driverStore
 
-pnputil.exe /add-driver $driverStore/$infFile
+Add-PrinterDriver -Name $JsonObject.driverName
 
-Add-PrinterDriver -Name $driverName
-
-Add-PrinterPort -Name $PortName -PrinterHostAddress $portAdress
-Add-Printer -Name $printerName -DriverName $driverName -PortName $portName
+Add-PrinterPort -Name $JsonObject.portName -PrinterHostAddress $JsonObject.portAddress
+Add-Printer -Name $JsonObject.printerName -DriverName $JsonObject.driverName -PortName $JsonObject.portName
