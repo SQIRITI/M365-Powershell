@@ -6,4 +6,4 @@ Remove-Printer -Name $JsonObject.printerName
 Remove-PrinterPort -Name $JsonObject.portName
 Remove-PrinterDriver -name $JsonObject.driverName
 
-pnputil.exe /delete-driver $JsonObject.infFile
+#pnputil.exe /delete-driver $JsonObject.infFile
