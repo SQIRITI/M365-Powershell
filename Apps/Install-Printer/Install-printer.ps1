@@ -5,8 +5,6 @@ $JsonObject = Get-Content $scriptDir | ConvertFrom-Json
 $driverStore = "$PSScriptRoot\Drivers\"
 $driverStore += $JsonObject.infFile
 
-Write-Host $driverStore
-
 pnputil.exe /add-driver $driverStore
 
 Add-PrinterDriver -Name $JsonObject.driverName
